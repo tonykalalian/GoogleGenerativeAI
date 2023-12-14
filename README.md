@@ -29,7 +29,16 @@ To build a multi-turn conversation, run:
 nodemon server.js
 ```
 Feel free to explore and adapt the provided examples to suit your specific use case.
+## Follow the prompts to interact with the generative model. Type "exit" to end the chat.
 
+### Configuration
+1. You can customize the chat behavior by modifying the generationConfig and safetySettings in the script:
+
+2. generationConfig: Adjust temperature, topK, topP, and maxOutputTokens for model output.
+3. safetySettings: Configure safety settings for blocking harmful content.
+```bash
+nodemon prompt.js
+```
 ## Requirements
 1. Node.js
 2. Gemini API Key (set as an environment variable)
