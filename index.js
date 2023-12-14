@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
-const app = express(); // Move this up
+const app = express(); 
 
 async function run() {
   try {

@@ -16,11 +16,9 @@ const rl = readline.createInterface({
 });
 
 async function runChat() {
-  // Initialize GoogleGenerativeAI
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
-  // Configuration for chat generation
   const generationConfig = {
     temperature: 1,
     topK: 1,
@@ -28,7 +26,6 @@ async function runChat() {
     maxOutputTokens: 2048,
   };
 
-  // Safety settings to block harmful content
   const safetySettings = [
     {
       category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -48,7 +45,6 @@ async function runChat() {
     },
   ];
 
-  // Start a chat with the configured settings
   const chat = model.startChat({
     generationConfig,
     safetySettings,
@@ -57,7 +53,6 @@ async function runChat() {
 
   try {
     while (true) {
-      // Prompt the user for input
       const userInput = await askQuestion('Enter your prompt (type "exit" to end): ');
 
       if (userInput.toLowerCase() === 'exit') {
@@ -65,27 +60,22 @@ async function runChat() {
         break;
       }
 
-      // Send the user input to the chat
       const result = await chat.sendMessage(userInput);
       const response = result.response;
 
-      // Log the generated response
       console.log(response.text());
     }
   } catch (error) {
     console.error("Error during chat:", error.message);
   } finally {
-    // Close the readline interface
     rl.close();
   }
 }
 
-// Utility function to ask a question asynchronously
 function askQuestion(question) {
   return new Promise((resolve) => {
     rl.question(question, resolve);
   });
 }
 
-// Run the chat function
 runChat();
